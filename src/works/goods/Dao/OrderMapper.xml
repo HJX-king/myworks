@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="works.goods.Dao.OrderMapper">
+	
+	<insert id="saveOrder"  useGeneratedKeys="true" keyProperty="id">
+	insert into orders values(default,#{user_id},#{price},#{address_id},#{status},#{create_time})
+	</insert>
+	<update id="updateOrderStatus">
+	update orders set status=1 where user_id=#{user_id} and id=#{id}
+	</update>
+	<select id="getList" resultType="works.goods.bean.Order">
+	select * from orders where user_id =#{user_id} limit #{start},#{pageSize}
+	</select>
+	<select id="getCount" resultType="_int">
+	select count(1) from orders where user_id =#{user_id} 
+	</select>
+	
+
+</mapper>

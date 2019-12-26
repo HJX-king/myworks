@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="works.goods.Dao.OrderGoodsMappingMapper">
+
+	<insert id="saveMapping">
+	insert into order_goods_mapping values
+	<foreach collection="list" item="item" index="index" separator=",">
+	(#{item.order_id},#{item.goods_id},#{item.num},#{item.price},#{item.inco},#{item.g_name})
+	</foreach>
+	</insert>
+	
+	<select id="getListByOrderIds" resultType="works.goods.bean.OrderGoodsMapping">
+	select * from order_goods_mapping <where>
+	order_id in
+	<if test="orderIds!=null and orderIds.length>0"></if>
+	<foreach collection="orderIds" item="item" open="(" close=")" separator=",">
+	#{item}
+	</foreach>
+	
+	</where> 
+	
+	
+	</select>
+
+
+
+
+
+</mapper>

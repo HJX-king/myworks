@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="works.user.dao.AddressMapper">
+	<insert id="saveAddress">
+	
+	insert into address values(default,#{user_id},#{r_name},#{cellphone},#{address},#{isdefault},#{creat_time})
+	</insert>
+	
+	<delete id="deteleByAddressIdAndUserId">
+	delete from address where id=#{id} and user_id=#{user_id}
+	</delete>
+
+	<update id="updateByAddressIdAndUserId">
+	update address set r_name=#{r_name},cellphone=#{cellphone},address=#{address} where id=#{id} and user_id=#{user_id}
+	</update>
+	<update id="updateIsdefaultByAddressIdAndUserId">
+	update address set isdefault=0 where  isdefault=1 and user_id=#{user_id}
+	</update>
+	<update id="updateIsdefaultByAddressIdAndUserId2">
+	update address set isdefault=1 where  id=#{id} and user_id=#{user_id}
+	</update>
+	<select id="getAddressByUserId" resultType="works.user.bean.Address">
+	select id,r_name,cellphone,address,isdefault from address where user_id=#{userId}
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

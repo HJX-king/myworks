@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="works.user.dao.UserInfoMapper">
+	<select id="getUserInfoByUserId" resultType="works.user.bean.UserInfo">
+	select nickName,cellphone,qq,email,inco from userinfo where user_id=#{id}
+	</select>
+	
+	<update id="updataUserInfo">
+	update userinfo set nickName=#{nickName},cellphone=#{cellphone},qq=#{qq},email=#{email},inco=#{inco} where user_id=#{userId}
+	</update>
+</mapper>

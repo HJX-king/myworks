@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="works.goods.Dao.CartMapper">
+<update id="updateCartByIdAndUserId">
+update cart set num=#{num} where id=#{id} and user_id=#{user_id}
+</update>
+
+<select id="getList" resultType="works.goods.bean.Cart">
+select  c.id, c.num , g.inco,g.g_name,g.price from cart c , goods g where g.id=c.goods_id and c.user_id=#{user_id} 
+</select>
+
+<insert id="saveCart">
+insert into cart values(default,#{user_id},#{goods_id},#{num},#{create_time})
+</insert>
+
+<update id="updateCart">
+update cart set num=#{num} where goods_id=#{goods_id} and user_id=#{user_id}
+</update>
+
+<select id="getCartByGoodsIdAndUserId" resultType="works.goods.bean.Cart">
+select num from cart where goods_id=#{goods_id} and user_id=#{user_id}
+</select>
+
+<delete id="deleteCartByGoodsIdAndUserId">
+delete from cart where id=#{id} and user_id=#{user_id}
+</delete>
+
+<select id="getGoodsByCartId" resultType="works.goods.bean.Cart">
+select  c.id, c.num , g.inco,g.g_name,g.price,g.id from cart c left join goods g on g.id=c.goods_id 
+<where>
+	c.user_id=#{user_id}
+	<if test="ids!=null and ids.length>0">
+	and c.id in
+	<foreach collection="ids" item="item" open="(" close=")" separator=",">
+	#{item}
+	</foreach>
+	</if>
+</where>
+</select>
+
+<delete id="deleteByIds">
+delete from cart <where>
+user_id=#{user_id}
+<if test="ids!=null and ids.length>0">
+and id in
+	<foreach collection="ids" item="item" open="("  close=")" separator=",">
+	#{item}
+	</foreach>
+</if> 
+</where> 
+</delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
